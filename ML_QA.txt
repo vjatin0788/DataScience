@@ -1,0 +1,43 @@
+Question and Answer related the ML
+
+Q1.Hello, I wonder to know that we need to do feature scaling or not. If need, why ? if do not, why ?
+
+A1.in general scaling is a one of "better safe than sorry" strategies: if you do not know for sure that it is not needed you'd better do it, just in case. 
+If you just want to apply a simple method then on their own:
+1) Linear Regression does not require scaling because similar operations are part of the method and scaling will be compensated;
+2) Decision Tree and Random Forest methods do not require scaling because values of each variable are considered separately;
+3) Naive Bayes method does not require scaling because it compares frequencies and not variable values. 
+ Contemporary Machine Learning methods often involve combinations of more simple methods and under these conditions determining uselessness of scaling is difficult. For example, Neural Network method is an ensemble of Logistic Regressions and as such theoretically does not stand to benefit from scaling. But in practice scaling helps with speed and accuracy of calculations. 
+
+We do scaling for each method in Part 3 so our visualization plots will be comparable.  
+
+
+Q2.Is there any particular reason why the independent variable values are held in a matrix instead of a vector ?
+   We could have written X=dataset.iloc[ :, 0].values for obtaining the same right ?
+
+A2.we do it because ML methods require numpy arrays as a set of independent variable vectors. 
+   Strictly speaking some of them in addition may work with pandas data frames, but not all yet.
+
+
+Q3.What to "Matrix" and "Vector" refer to in this context? 
+A3.here our vectors are ordered n-tuples, as defined in Analytic Geometry. For example a 2d vector is an ordered pair and a 3d vector is an ordered triplet of numbers. We can generalize the last 2 examples and consider any set of ordered numbers (or ordered numerical sequence) as a vector. They may have different names in different computer languages, say in Python a list is a vector in the above sense and a 1d numpy array is a vector as well. 
+   In R such vectors are called R vectors. 
+   A matrix is a further generalization of a vector concept. They have rows and columns. In Python they can be presented by 2d arrays and in R they are presented as R matrices.
+
+Q4.why we re taking the minimum value of (y-y^)^2?
+A4. Because (y-y^)^2 is the error function and we are trying to minimize the error function from our model. Thats why we are minimizing the error function.
+
+Q5.I tried a different way of coding the same, and this is what I observed
+   X = dataset.iloc[:, 0].values ----> returns an array of size (30,) - which is called as a vector?
+   X = dataset.iloc[:, :-1].values (like the video) ----> returns an array of size (30,1) - which is called as a matrix?
+   My doubt is that how is it that just by varying the indexing style of the column, does the distinction between a matrix and vector come?
+A5.It depends on what you have in the column entry. When it is one index like for y we get a vector. When it is a set of indices we get a matrix. Notation [ :-1] means all indices except for a last one. 
+
+
+Q6.Difference between fit_transform and transform ?
+A6.since Python always utilizes an Object-Oriented Programming then any method depends on an object to which it is applied. For example when fit()  method is applied to regressor or classifier it computes a machine learning model: Linear Regression, Decision Tree and such.
+   The fit_transform() method in our lectures is used to modify numpy arrays. It is paired with transform() method (not with fit() for regressors and classifiers). They both work with an object from StandardScaler() class, or Imputer() class, or another class. As an object it may have attributes, and when it does we can use them to store some information. It is an object-oriented programming feature.
+   The fit_transform() method contains its own fitting and transformation. 
+   The fitting part here is used to analyze the data on which we apply the object (getting the mean, the min, the max, the standard deviation, outliers, etc.) in order to understand how the data is structured. For StandardScaler it computes means and standard deviations for corresponding columns.
+   Then once the object understands how the data is structured thanks to the fitting, the transformation part is used to apply a required transformation, like feature scaling. 
+   And since we want the test set to go through the same transformations as the training set, we don't need to create a new scaling object that we fit to the test set and then use to transform the test set, we can directly use the object already created and fitted to the training set, to transform the test set. This is why we apply to X_test only transform().
