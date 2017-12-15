@@ -36,3 +36,18 @@ regressor.fit(X_train,y_train)
 
 #predicting the salary on test case
 y_pred = regressor.predict(X_test)
+
+#plotting the training observaion
+plt.scatter(X_train,y_train,color='red')
+plt.plot(X_train,regressor.predict(X_train),color='green')
+#plt.plot(X_test,y_pred,color='green')
+plt.xlabel('Experience')
+plt.ylabel('Salary')
+plt.show()
+#plotting the test observation
+plt.scatter(X_test,y_test,color='red')
+plt.plot(X_train,regressor.predict(X_train),color='green') #becase our model is trained on the 
+#plt.plot(X_test,y_pred,color='green')
+plt.xlabel('Experience')
+plt.ylabel('Salary')
+plt.show()
