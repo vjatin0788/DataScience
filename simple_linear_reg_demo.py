@@ -47,7 +47,6 @@ plt.show()
 #plotting the test observation
 plt.scatter(X_test,y_test,color='red')
 plt.plot(X_train,regressor.predict(X_train),color='green') #becase our model is trained on the 
-#plt.plot(X_test,y_pred,color='green')
 plt.xlabel('Experience')
 plt.ylabel('Salary')
 plt.show()
