@@ -1,6 +1,6 @@
 Question and Answer related the ML
 
-Q1.Hello, I wonder to know that we need to do feature scaling or not. If need, why ? if do not, why ?
+Q1.we need to do feature scaling or not. If need, why ? if do not, why ?
 
 A1.in general scaling is a one of "better safe than sorry" strategies: if you do not know for sure that it is not needed you'd better do it, just in case. 
 If you just want to apply a simple method then on their own:
@@ -41,3 +41,13 @@ A6.since Python always utilizes an Object-Oriented Programming then any method d
    The fitting part here is used to analyze the data on which we apply the object (getting the mean, the min, the max, the standard deviation, outliers, etc.) in order to understand how the data is structured. For StandardScaler it computes means and standard deviations for corresponding columns.
    Then once the object understands how the data is structured thanks to the fitting, the transformation part is used to apply a required transformation, like feature scaling. 
    And since we want the test set to go through the same transformations as the training set, we don't need to create a new scaling object that we fit to the test set and then use to transform the test set, we can directly use the object already created and fitted to the training set, to transform the test set. This is why we apply to X_test only transform().
+  
+Q7.What is adjacent R-squared and multiple R-squared?
+A7.Refer - http://thestatsgeek.com/2013/10/28/r-squared-and-adjusted-r-squared/
+
+Q8.what is confidence interval? what is significance of it?
+A8.refer http://www.datasciencecentral.com/profiles/blogs/black-box-confidence-intervals-excel-and-perl-implementations-det
+
+Q9.if I execute plot(regressor) i get four plots qq norm residuals etc can you please tell me what is the significance of these graphs and what do the imply ?
+A9.they are provided to analyze Linear Regression fit to a training set and to check Linear Regression assumptions. They are not very relevant to Data Science because in Machine learning a fitted model performance on a test set is crucial. It means that we can get a model which behaves well from statistical point of view but if we can find a better method then the Linear Regression model and the last one does not matter. And if a fitted Linear regression does not conform well to Linear Regression assumptions but it has the best score when we apply Cross Validation then it will be used.
+
