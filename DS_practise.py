@@ -202,7 +202,23 @@ data.HP.apply(lambda n : n/2)
 data["total_power"] = data.Attack + data.Defense
 data.head()
 
-
 #Hierarichal indexing
 data4 =data3.set_index(["Type 1","Type 2"]) #it will create index from two column
 data4.loc["Fire","Flying"] #it will call the index
+
+#melting and pivoting the dataframe.
+melted = pd.melt(data3,id_vars ='Name',value_vars =["HP","Attack"]) #converting the columns into rows
+melted.pivot(index = 'Name',columns="variable",values = "value") #converting the rows into columns
+data3.pivot(index ="Name",columns = "Type 1",values = "HP")
+
+#Stacking and Unstacking the index
+df = data3.set_index(["Name","Type 1"])
+df = df.unstack(level=1)# it unstack the index with level 1. the level is basically to index column. it starts from 0.
+df =df.swaplevel(0,1) #it swap the 2 column in index
+
+#CATEGORICALS AND GROUPBY
+data3.groupby("Type 1").std() #grouping
+data3.groupby("Type 1")["HP","Attack"].mean() #showing multiple column
+data3.groupby("Type 1").HP.mean() #showing particular column
+data3["Type 1"] = data3["Type 1"].astype("category") #changing type to category
+0
